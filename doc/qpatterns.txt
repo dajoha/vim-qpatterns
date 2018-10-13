@@ -1,0 +1,192 @@
+*vim-qpatterns.txt*   v0.1
+
+A Vim companion for the `qpatterns` python library (written by the author as
+well).
+
+==============================================================================
+INTRODUCTION                               *qpatterns*   *qpatterns-introduction*
+
+`vim-qpatterns` brings the power of `qpatterns` expressions into Vim.
+
+
+
+==============================================================================
+DEFAULT SHORTCUTS                                         *qpatterns-shortcuts*
+
+These shortcuts are available by default, but you can disable them (see
+|g:qpatterns_enable_mappings|). All of the following mappings are available in
+normal, visual and operator-pending modes:
+
+<leader>/
+    Open a prompt which waits for qpattern; the qpattern will then be searched
+    into the current file, beginning from the cursor position.
+    
+    Equivalent of |<plug>QpatternsFind| and |<plug>QpatternsSelect|
+
+<leader>?
+    Same as <leader>/, but search in the reversed direction.
+
+    Equivalent of |<plug>QpatternsRevFind| and |<plug>QpatternsRevSelect|
+
+<leader>&
+    Same as <leader>/, but search in the current line, starting from the
+    beginning of the line.
+
+    Equivalent of |<plug>QpatternsInlineFind| and |<plug>QpatternsInlineSelect|
+
+<leader>@
+    Search for the last qpattern entered in a prompt (any of the above
+    commands) in the current line, starting from the beginning of the line.
+
+    Equivalent of |<plug>QpatternsInlineLast|
+
+<leader><left>
+    Move the cursor to the previous match of the last qpattern entered in a
+    prompt.
+
+    Equivalent of |<plug>QpatternsPrevMatch| and |<plug>QpatternsPrevSelect|
+
+<leader><right>
+    Move the cursor to the next match of the last qpattern entered in a
+    prompt.
+
+    Equivalent of |<plug>QpatternsNextMatch| and |<plug>QpatternsNextSelect|
+
+
+
+==============================================================================
+GLOBAL FUNCTIONS                                          *qpatterns-functions*
+
+Global functions are enabled by defaults, you can disable them (see
+|g:qpatterns_enable_functions|).
+
+------------------------------------------------------------------------------
+QSearch(text, pattern)                                              *QSearch()*
+
+    Search `pattern` inside `text`, and return a list of dictionnaries, with
+    this format:
+    >
+    [ {
+        'match': 'text',       " the matched text content
+        'start': 5,            " the 0-based start pos (inclusive)
+        'end': 9,              " the 0-based end pos (exclusive)
+        'source': 'some text'  " the source text: equals to a:text
+      },
+      ...
+    ]
+<
+------------------------------------------------------------------------------
+QSearchStr(text, pattern)                                        *QSearchStr()*
+
+    Search `pattern` inside `text`, and return a list of the matched strings.
+
+
+
+==============================================================================
+PLUG MAPPINGS                                         *qpatterns-plug-mappings*
+
+------------------------------------------------------------------------------
+<plug>QpatternsFind                                       *<plug>QpatternsFind*
+    Open a prompt which waits for qpattern; the qpattern will then be searched
+    into the current file, beginning from the cursor position.
+
+    Available in normal mode.
+
+------------------------------------------------------------------------------
+<plug>QpatternsEditFind                               *<plug>QpatternsEditFind*
+    Same as |<plug>QpatternsFind|, but start the prompt by editing the last
+    qpattern.
+
+------------------------------------------------------------------------------
+<plug>QpatternsRevFind                                 *<plug>QpatternsRevFind*
+    Same as |<plug>QpatternsFind|, but search in the reversed direction.
+
+    Available in normal mode.
+
+------------------------------------------------------------------------------
+<plug>QpatternsRevEditFind                         *<plug>QpatternsRevEditFind*
+    Same as |<plug>QpatternsRevFind|, but start the prompt by editing the last
+    qpattern.
+
+    Available in normal mode.
+
+------------------------------------------------------------------------------
+<plug>QpatternsInlineFind                           *<plug>QpatternsInlineFind*
+    Same as |<plug>QpatternsFind|, but search in the current line, starting
+    from the beginning of the line.
+
+    Available in normal mode.
+
+------------------------------------------------------------------------------
+<plug>QpatternsInlineLast                           *<plug>QpatternsInlineLast*
+    Search for the last qpattern entered in a prompt in the current line,
+    starting from the beginning of the line.
+
+    Available in normal, visual and operator-pending modes.
+
+------------------------------------------------------------------------------
+<plug>QpatternsPrevMatch                             *<plug>QpatternsPrevMatch*
+    Move the cursor to the previous match of the last qpattern entered in a
+    prompt.
+
+    Available in normal mode.
+
+------------------------------------------------------------------------------
+<plug>QpatternsNextMatch                             *<plug>QpatternsNextMatch*
+    Move the cursor to the next match of the last qpattern entered in a
+    prompt.
+
+    Available in normal mode.
+
+------------------------------------------------------------------------------
+<plug>QpatternsSelect                                   *<plug>QpatternsSelect*
+    Open a prompt which waits for a qpattern; then select the first match.
+
+    Available in visual and operator-pending modes.
+
+------------------------------------------------------------------------------
+<plug>QpatternsRevSelect                             *<plug>QpatternsRevSelect*
+    Same as |<plug>QpatternsSelect|, but select the previous match.
+
+    Available in visual and operator-pending modes.
+
+------------------------------------------------------------------------------
+<plug>QpatternsInlineSelect                       *<plug>QpatternsInlineSelect*
+    Same as |<plug>QpatternsSelect|, but select the first match in the current
+    line.
+
+    Available in visual and operator-pending modes.
+
+------------------------------------------------------------------------------
+<plug>QpatternsNextSelect                           *<plug>QpatternsNextSelect*
+    Select the next match of the last entered qpattern.
+
+    Available in visual and operator-pending modes.
+
+------------------------------------------------------------------------------
+<plug>QpatternsPrevSelect                           *<plug>QpatternsPrevSelect*
+    Select the previous match of the last entered qpattern.
+
+    Available in visual and operator-pending modes.
+
+
+
+==============================================================================
+CONFIGURATION VARIABLES                     *qpatterns-configuration-variables*
+
+g:qpatterns_leader                                         *g:qpatterns_leader*
+    Set the leader key used for the plugin (default: "<leader>")
+
+g:qpatterns_visual_leader                           *g:qpatterns_visual_leader*
+    Set the visual-mode leader key (default: |g:qpatterns_leader|)
+
+g:qpatterns_enable_mappings                       *g:qpatterns_enable_mappings*
+    Enable default mappings (default: 1)
+
+g:qpatterns_enable_functions                     *g:qpatterns_enable_functions*
+    Enable global functions (default: 1)
+
+
+
+==============================================================================
+vim:tw=78:sw=4:ts=4:et:ft=help:norl:

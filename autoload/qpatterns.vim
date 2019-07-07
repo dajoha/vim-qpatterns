@@ -332,11 +332,17 @@ function! s:call_search_method(text, pattern, method)
 		let l:pattern = a:pattern
 	endif
 
-	let l:return = []
-
-	call py3eval(a:method)
-
-	return l:return
+	if has('nvim')
+		if a:method == 'qpatterns_search()'
+			return QpatternsNvimSearch(a:text, a:pattern)
+		else
+			return QpatternsNvimSearchStr(a:text, a:pattern)
+		endif
+	else
+		let l:return = []
+		call py3eval(a:method)
+		return l:return
+	endif
 endf
 
 

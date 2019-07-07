@@ -29,6 +29,7 @@ def qpatterns_call_search_method(method):
     text = vim.eval('a:text')
 
     try:
+        result = method(text, pattern)
         vim_return.extend(method(text, pattern))
     except Exception as e:
         vim.command("echo '{}'".format(e))
